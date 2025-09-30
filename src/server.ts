@@ -1,13 +1,20 @@
 import { Server } from "http";
 import app from "./app";
-
+import mongoose from "mongoose";
+import { envList } from "./app/config/envList";
 let server: Server;
 
 const startServer = async () => {
   try {
+
+
+    await mongoose.connect(envList.DB_URI)
+    console.log("YaY!! Connected to DB...");
+
+
     server = app.listen(5000, () => {
       console.log(
-        `Server  is successfully listening to port http://localhost:5000`
+        `Server  is successfully listening to port http://localhost:${envList.PORT}`
       );
     });
   } catch (error) {
