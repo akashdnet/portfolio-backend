@@ -1,3 +1,4 @@
+import { deleteCloudinaryImage } from "../../config/cloudinary";
 import AppError from "../../utils/AppError";
 import statusCode from "../../utils/statusCodes";
 import UniversalSearch, { TUniversalSearchOptions } from "../../utils/UniversalSearch";
@@ -34,19 +35,46 @@ const create = async (payload:{data:TProject, file: Express.Multer.File}) => {
 
 const getAllProjects = async (payload:TUniversalSearchOptions<TProject>)=>{
 
-    const result = await new UniversalSearch<TProject | any>(ProjectModel).GetData(payload)
-
-    
-
-
+    const result = await new UniversalSearch<TProject | any>(ProjectModel).GetData(payload);
     return result
 
 }
 
 
+const getProjectById = async (id:string)=>{
+    const result = await ProjectModel.findById(id);
+    if (!result) {
+        throw new AppError(statusCode.NOT_FOUND, "Project not found.");
+    }   
+    return result;
+}
+
+
+const deleteByID = async (id:string)=>{
+    
+    
+  const result = await ProjectModel.findByIdAndDelete(id);
+  if(!result){
+    throw new AppError(statusCode.NOT_FOUND, "User not found.")
+  }
+
+  if(result.thumbnail){
+    await deleteCloudinaryImage(result.thumbnail)
+  }
+
+  return result;
+
+}
+
+
+
 const ProjectServices = {
     create,
     getAllProjects,
+    getProjectById,
+    deleteByID,
 }
+
+
 
 export default ProjectServices

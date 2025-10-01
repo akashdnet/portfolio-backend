@@ -2,6 +2,7 @@ import { Server } from "http";
 import app from "./app";
 import mongoose from "mongoose";
 import { envList } from "./app/config/envList";
+import { seed } from "./app/utils/seed";
 let server: Server;
 
 const startServer = async () => {
@@ -17,6 +18,10 @@ const startServer = async () => {
         `Server  is successfully listening to port http://localhost:${envList.PORT}`
       );
     });
+
+    // seed();
+
+
   } catch (error) {
     console.log(error);
   }

@@ -19,6 +19,14 @@ router.get("/all-projects",
     ProjectController.getAllProjects
 )
 
+router.get("/:id",
+    ProjectController.getProjectById
+)
+
+router.delete("/:id",
+    ProjectController.deleteByID
+)
+
 
 
 
