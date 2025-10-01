@@ -55,7 +55,7 @@ const deleteByID = async (id:string)=>{
     
   const result = await ProjectModel.findByIdAndDelete(id);
   if(!result){
-    throw new AppError(statusCode.NOT_FOUND, "User not found.")
+    throw new AppError(statusCode.NOT_FOUND, "Project not found.")
   }
 
   if(result.thumbnail){
@@ -68,11 +68,33 @@ const deleteByID = async (id:string)=>{
 
 
 
+
+
+const update = async (id:string, payload:{data:Partial<TProject>, file: Express.Multer.File})=>{
+
+    const data = {
+        ...payload.data,
+        thumbnail: payload.file?.path
+    }
+
+
+    const result = await ProjectModel.findByIdAndUpdate(id, data, {new:true});
+    if(!result){
+        throw new AppError(statusCode.NOT_FOUND, "Project not found.")
+    }
+
+    return result;
+
+}
+
+
+
 const ProjectServices = {
     create,
     getAllProjects,
     getProjectById,
     deleteByID,
+    update,
 }
 
 

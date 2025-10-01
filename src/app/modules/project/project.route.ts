@@ -23,6 +23,12 @@ router.get("/:id",
     ProjectController.getProjectById
 )
 
+router.patch("/:id",
+    upload.single("thumbnail"),
+    validateRequest(ProjectDataValidation),
+    ProjectController.update
+)
+
 router.delete("/:id",
     ProjectController.deleteByID
 )
