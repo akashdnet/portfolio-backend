@@ -1,7 +1,6 @@
-import { Request, Response, Router } from "express"
-import { sendResponse } from "../utils/sendResponse"
-import testRoute from "../utils/testRoute"
+import {  Router } from "express"
 import { ProjectRoutes } from "../modules/project/project.route"
+import { BlogRoutes } from "../modules/blog/blog.route"
 
 
 
@@ -12,6 +11,10 @@ const moduleRoutes = [
     {
         path: "/project",
         route: ProjectRoutes
+    },
+    {
+        path: "/blog",
+        route: BlogRoutes
     },
 
 ]

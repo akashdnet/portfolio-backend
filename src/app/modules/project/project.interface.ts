@@ -5,4 +5,5 @@ export interface TProject {
   liveSite: string
   description: string
   features: string[]
+  isPublished: boolean
 }

@@ -7,6 +7,7 @@ export const ProjectDataValidation = z.object({
   description: z.string().min(5, { message: "Description must be at least 5 characters long" }),
   features: z.array(
     z.string().min(1, { message: "At least one feature is required" })
-  ).min(1, { message: "At least one feature is required" })
+  ).min(1, { message: "At least one feature is required" }),
+  isPublished: z.boolean().optional(),
 })
 

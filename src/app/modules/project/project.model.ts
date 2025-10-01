@@ -26,6 +26,10 @@ const projectSchema = new mongoose.Schema<TProject>({
     type: [String],
     required: true,
   },
+  isPublished: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 export const ProjectModel = mongoose.model<TProject>("Project", projectSchema);

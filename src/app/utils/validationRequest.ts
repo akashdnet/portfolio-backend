@@ -3,6 +3,14 @@ import { ZodObject } from "zod"
 
 export const validateRequest = (zodSchema: ZodObject) => async (req: Request, res: Response, next: NextFunction) => {
 
+    console.log(`
+        
+        
+        
+       blog validation data
+        
+        `,req.body)
+
     try {
         if (req.body.data) {
             req.body = JSON.parse(req.body.data)
