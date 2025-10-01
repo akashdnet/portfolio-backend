@@ -1,11 +1,45 @@
-import { deleteCloudinaryImage } from "../config/cloudinary"
-
-const data = "https://res.cloudinary.com/dfjnnb54s/image/upload/v1759283090/iysuw7xxk3-1759283087365-image-not-found.jpg"
-
-
+import { UserModel } from "../modules/user/user.model"
+import AppError from "./AppError"
+import statusCode from "./statusCodes"
 
 
 
-export function seed(){
-    // deleteCloudinaryImage(data)
+
+
+
+export async function seed(){
+    await createUser()
+}
+
+
+
+
+const createUser = async ()=>{
+
+    const user = {
+        email: "admin@akash.com",
+        password: "12345678"
+    }
+
+    const isExist = await UserModel.findOne({email: user.email})
+    
+    try {
+        if(isExist){
+        console.log(`😎 Already admin user exist - ${user.email}:${user.password}`)
+    }else{
+        const result = await UserModel.create(user)
+        if(result){
+            console.log(`✅ Successfully created admin user - ${user.email}:${user.password}`)
+        }
+
+    }
+        
+    } catch (error) {
+
+        console.log(error)
+
+        new AppError(statusCode.NOT_IMPLEMENTED, "Something went wrong.")        
+    }
+
+
 }

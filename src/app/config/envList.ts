@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import type { StringValue } from "ms"
 
 dotenv.config();
 
@@ -11,9 +12,9 @@ interface TEnvList {
   GOOGLE_CLIENT_SECRET: string;
   GOOGLE_CALLBACK_URL: string;
   JWT_ACCESS_SECRET: string;
-  JWT_ACCESS_EXPIRES: string;
+  JWT_ACCESS_EXPIRES: StringValue;
   JWT_REFRESH_SECRET: string;
-  JWT_REFRESH_EXPIRES: string;
+  JWT_REFRESH_EXPIRES: StringValue;
   EXPRESS_SESSION_SECRET: string;
   AFTER_GOOGLE_LOGIN_SUCCESS_URL: string;
   CLOUDINARY_CLOUD_NAME: string;
@@ -60,9 +61,9 @@ const loadEnvList = (): TEnvList => {
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET!,
     GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL!,
     JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET!,
-    JWT_ACCESS_EXPIRES: process.env.JWT_ACCESS_EXPIRES!,
+    JWT_ACCESS_EXPIRES: process.env.JWT_ACCESS_EXPIRES as StringValue,
     JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET!,
-    JWT_REFRESH_EXPIRES: process.env.JWT_REFRESH_EXPIRES!,
+    JWT_REFRESH_EXPIRES: process.env.JWT_REFRESH_EXPIRES as StringValue,
     EXPRESS_SESSION_SECRET: process.env.EXPRESS_SESSION_SECRET!,
     AFTER_GOOGLE_LOGIN_SUCCESS_URL: process.env.AFTER_GOOGLE_LOGIN_SUCCESS_URL!,
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME!,

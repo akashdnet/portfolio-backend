@@ -19,7 +19,7 @@ const startServer = async () => {
       );
     });
 
-    // seed();
+    await seed();
 
 
   } catch (error) {
