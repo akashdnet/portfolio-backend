@@ -3,6 +3,7 @@ import BlogServices from "./blog.controller";
 import { upload } from "../../middlewares/upload";
 import { validateRequest } from "../../utils/validationRequest";
 import BlogDataValidation from "./blog.validation";
+import AuthGuard from "../../middlewares/Auth";
 
 
 const router = express.Router();
@@ -10,6 +11,7 @@ const router = express.Router();
 
 router.post(
     "/create",
+    AuthGuard,
     upload.single("thumbnail"),
     validateRequest(BlogDataValidation.create),
     BlogServices.create
@@ -24,12 +26,14 @@ router.get("/:id",
 )
 
 router.patch("/:id",
+    AuthGuard,
     upload.single("thumbnail"),
     validateRequest(BlogDataValidation.update),
     BlogServices.update
 )
 
 router.delete("/:id",
+    AuthGuard,
     BlogServices.deleteByID
 )
 

@@ -11,7 +11,7 @@ const REFRESH_SECRET = envList.JWT_REFRESH_SECRET
 
 
 
-export default function authMiddleware(req: any, res: any, next: any) {
+export default function AuthGuard(req: any, res: any, next: any) {
 
   const accessToken = req.cookies?.access_token
   if (!accessToken) return res.status(401).json({ message: "No access token" })

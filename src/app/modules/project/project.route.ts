@@ -3,6 +3,7 @@ import ProjectController from "./project.controller";
 import { upload } from "../../middlewares/upload";
 import { validateRequest } from "../../utils/validationRequest";
 import { ProjectDataValidation } from "./project.validation";
+import AuthGuard from "../../middlewares/Auth";
 
 
 const router = express.Router();
@@ -10,6 +11,7 @@ const router = express.Router();
 
 router.post(
     "/create",
+    AuthGuard,
     upload.single("thumbnail"),
     validateRequest(ProjectDataValidation),
     ProjectController.createProject
@@ -24,12 +26,14 @@ router.get("/:id",
 )
 
 router.patch("/:id",
+    AuthGuard,
     upload.single("thumbnail"),
     validateRequest(ProjectDataValidation),
     ProjectController.update
 )
 
 router.delete("/:id",
+    AuthGuard,
     ProjectController.deleteByID
 )
 
