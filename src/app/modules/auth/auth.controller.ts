@@ -35,7 +35,6 @@ const login = catchAsync(async (req: Request, res: Response) => {
 
 
 
-
      setAuthCookie(res, {accessToken: AccessToken, refreshToken: RefreshToken});
 
 

@@ -3,10 +3,6 @@ import AppError from "./AppError"
 import statusCode from "./statusCodes"
 
 
-
-
-
-
 export async function seed(){
     await createUser()
 }
