@@ -22,7 +22,9 @@ app.use(cookieParser())
 
 
 
-const whitelist = [envList.FRONT_END_SITE_LOCAL, envList?.FRONT_END_SITE_PRODUCTION]
+const whitelist = ["protfolio-frontend-mu.vercel.app",
+"protfolio-frontend-git-main-akashs-projects-88bc9268.vercel.app",
+"protfolio-frontend-e7zfmzd10-akashs-projects-88bc9268.vercel.app", envList.FRONT_END_SITE_LOCAL, envList?.FRONT_END_SITE_PRODUCTION]
 const corsOptions = {
   origin: (origin: string | undefined, callback: any) => {
     if (!origin || whitelist.includes(origin)) {
