@@ -34,7 +34,6 @@ const create = async (payload:{data:TProject, file: Express.Multer.File}) => {
 
 
 const getAllProjects = async (payload:TUniversalSearchOptions<TProject>)=>{
-
     const result = await new UniversalSearch<TProject | any>(ProjectModel).GetData(payload);
     return result
 
@@ -72,16 +71,37 @@ const deleteByID = async (id:string)=>{
 
 const update = async (id:string, payload:{data:Partial<TProject>, file: Express.Multer.File})=>{
 
-    const data = {
+
+    
+    const isExist = await ProjectModel.findById(id);
+    
+
+
+
+    let data
+    
+    if(!payload?.file?.path){
+         data = { ...payload.data }
+
+    }else{
+         data = {
         ...payload.data,
         thumbnail: payload.file?.path
     }
+    }
+
+   
 
 
     const result = await ProjectModel.findByIdAndUpdate(id, data, {new:true});
     if(!result){
         throw new AppError(statusCode.NOT_FOUND, "Project not found.")
     }
+
+    if(payload?.file?.path && isExist?.thumbnail){
+         await deleteCloudinaryImage(result.thumbnail)
+    }
+
 
     return result;
 

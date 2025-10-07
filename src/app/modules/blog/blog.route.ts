@@ -4,6 +4,8 @@ import { upload } from "../../middlewares/upload";
 import { validateRequest } from "../../utils/validationRequest";
 import BlogDataValidation from "./blog.validation";
 import AuthGuard from "../../middlewares/Auth";
+import { success } from "zod";
+import { sendResponse } from "../../utils/sendResponse";
 
 
 const router = express.Router();
@@ -11,7 +13,7 @@ const router = express.Router();
 
 router.post(
     "/create",
-    AuthGuard,
+    // AuthGuard,
     upload.single("thumbnail"),
     validateRequest(BlogDataValidation.create),
     BlogServices.create
@@ -25,7 +27,7 @@ router.get("/:id",
     BlogServices.getDataById
 )
 
-router.patch("/:id",
+router.patch("/:id",   
     AuthGuard,
     upload.single("thumbnail"),
     validateRequest(BlogDataValidation.update),

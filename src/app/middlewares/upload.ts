@@ -8,6 +8,12 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     public_id: (req, file) => {
+      console.log(`multer
+        
+        
+        
+        
+        `,file.originalname)
       const ext = path.extname(file.originalname).toLowerCase();
 
       const baseName = path

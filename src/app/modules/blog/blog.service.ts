@@ -61,6 +61,9 @@ const update = async (
   id: string,
   payload: { data: Partial<TBlog>; file: Express.Multer.File }
 ) => {
+
+
+  
   const data = {
     ...payload.data,
     thumbnail: payload.file?.path,

@@ -23,6 +23,6 @@ const blogSchema = new mongoose.Schema<TBlog>({
     type: Boolean,
     default: false,
   },
-});
+}, { timestamps: true });
 
 export const BlogModel = mongoose.model<TBlog>("Blog", blogSchema);

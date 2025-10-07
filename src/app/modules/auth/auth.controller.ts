@@ -32,7 +32,7 @@ const login = catchAsync(async (req: Request, res: Response) => {
     const RefreshToken = JwtTokenGenerator.RefreshToken(user)
 
 
-    res.cookie("access_token", AccessToken , { httpOnly: true, secure: false, maxAge: 15 * 1000 });
+    res.cookie("access_token", AccessToken , { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 });
     res.cookie("refresh_token", RefreshToken, { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 });
     
     sendResponse(res, {
@@ -48,8 +48,22 @@ const login = catchAsync(async (req: Request, res: Response) => {
 
 
 
+const logout = catchAsync(async (req: Request, res: Response) => {
+  res.clearCookie("access_token")
+  res.clearCookie("refresh_token")
+  sendResponse(res, {
+    statusCode: statusCode.OK,
+    success: true,
+    message: "Logout successfully.",
+    data: []
+  });
+  
+})
+
+
 const AuthController = {
   login,
+  logout,
   
 };
 

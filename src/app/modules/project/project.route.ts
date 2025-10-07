@@ -2,7 +2,7 @@ import express from "express";
 import ProjectController from "./project.controller";
 import { upload } from "../../middlewares/upload";
 import { validateRequest } from "../../utils/validationRequest";
-import { ProjectDataValidation } from "./project.validation";
+import { ProjectDataValidationCreate, ProjectDataValidationUpdate } from "./project.validation";
 import AuthGuard from "../../middlewares/Auth";
 
 
@@ -13,7 +13,7 @@ router.post(
     "/create",
     AuthGuard,
     upload.single("thumbnail"),
-    validateRequest(ProjectDataValidation),
+    validateRequest(ProjectDataValidationCreate),
     ProjectController.createProject
 );
 
@@ -25,10 +25,10 @@ router.get("/:id",
     ProjectController.getProjectById
 )
 
-router.patch("/:id",
+router.put("/:id",
     AuthGuard,
     upload.single("thumbnail"),
-    validateRequest(ProjectDataValidation),
+    validateRequest(ProjectDataValidationUpdate),
     ProjectController.update
 )
 

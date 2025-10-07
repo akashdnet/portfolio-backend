@@ -69,6 +69,8 @@ const deleteByID = catchAsync(async (req: Request, res: Response) => {
 
 
 const update = catchAsync(async (req: Request, res: Response) => {
+  console.log(`req.body `,req.body)
+  console.log(`req.file `,req.file)
 
   const { id } = req.params;
   if (!id) {
