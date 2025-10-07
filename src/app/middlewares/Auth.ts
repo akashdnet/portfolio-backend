@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 import JwtTokenGenerator from "../utils/JwtTokenGenerator"
 import { UserModel } from "../modules/user/user.model"
 import { Request } from "express"
+import { setAuthCookie } from "../utils/setCookies"
 
 
 
@@ -44,8 +45,15 @@ export default function AuthGuard(req: any, res: any, next: any) {
         const newAccessToken = JwtTokenGenerator.AccessToken(user)
         const newRefreshToken = JwtTokenGenerator.RefreshToken(user)
 
-        res.cookie("access_token", newAccessToken, { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 })
-        res.cookie("refresh_token", newRefreshToken, { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 })
+
+
+        setAuthCookie(res, {accessToken: newAccessToken, refreshToken: newRefreshToken});
+
+
+
+
+        // res.cookie("access_token", newAccessToken, { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 })
+        // res.cookie("refresh_token", newRefreshToken, { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 })
 
         req.user = { id: user.id, email: user.email }
         return next()

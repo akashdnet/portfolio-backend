@@ -7,6 +7,8 @@ import JwtTokenGenerator from "../../utils/JwtTokenGenerator";
 import bcrypt from "bcrypt"
 import { UserModel } from "../user/user.model";
 import { envList } from "../../config/envList";
+import { access } from "fs";
+import { setAuthCookie } from "../../utils/setCookies";
 
 
 
@@ -32,8 +34,13 @@ const login = catchAsync(async (req: Request, res: Response) => {
     const RefreshToken = JwtTokenGenerator.RefreshToken(user)
 
 
-    res.cookie("access_token", AccessToken , { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 });
-    res.cookie("refresh_token", RefreshToken, { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 });
+
+
+     setAuthCookie(res, {accessToken: AccessToken, refreshToken: RefreshToken});
+
+
+    // res.cookie("access_token", AccessToken , { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 });
+    // res.cookie("refresh_token", RefreshToken, { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 });
     
     sendResponse(res, {
     statusCode: statusCode.OK,
