@@ -12,7 +12,7 @@ const REFRESH_SECRET = envList.JWT_REFRESH_SECRET
 
 
 
-export default function AuthGuard(req: any, res: any, next: any) {
+export default async function AuthGuard(req: any, res: any, next: any) {
   
 
   // console.log(`test cookies: ` ,req.cookies)
@@ -28,14 +28,14 @@ export default function AuthGuard(req: any, res: any, next: any) {
   }
 
 
-  jwt.verify(accessToken, ACCESS_SECRET, (err: any, decoded: any) => {
+  jwt.verify(accessToken, ACCESS_SECRET, async (err: any, decoded: any) => {
 
     if (err && err.name === "TokenExpiredError") { 
 
       try {
 
         const decodedRefreshToken: any = jwt.verify(refreshToken, REFRESH_SECRET)
-        const user:any = UserModel.findOne((u:any) => u._id === decodedRefreshToken.id)
+        const user:any = await UserModel.findOne((u:any) => u._id === decodedRefreshToken.id)
         if (!user) {
           res.clearCookie("access_token")
           res.clearCookie("refresh_token")
