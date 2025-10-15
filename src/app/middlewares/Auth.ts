@@ -57,7 +57,19 @@ export default function AuthGuard(req: any, res: any, next: any) {
 
         req.user = { id: user.id, email: user.email }
         return next()
-      } catch {
+      } catch(err:any) {
+        console.log(`
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          Invalid or expired refresh token`,err)
         res.clearCookie("access_token")
         res.clearCookie("refresh_token")
         return res.status(403).json({ message: "Invalid or expired refresh token" })
