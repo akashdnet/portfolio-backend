@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post(
     "/create",
-    // AuthGuard,
+    AuthGuard,
     upload.single("thumbnail"),
     validateRequest(BlogDataValidation.create),
     BlogServices.create
