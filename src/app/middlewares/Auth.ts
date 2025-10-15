@@ -21,7 +21,7 @@ export default function AuthGuard(req: any, res: any, next: any) {
   const refreshToken = req.cookies?.refresh_token
 
 
-  if (!accessToken && !refreshToken) {
+  if (!accessToken || !refreshToken) {
     res.clearCookie("access_token")
     res.clearCookie("refresh_token")
     return res.status(401).json({ message: "No access token or refresh token found!" })
