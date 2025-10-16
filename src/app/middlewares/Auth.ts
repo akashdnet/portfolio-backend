@@ -44,7 +44,7 @@ export default async function AuthGuard(req: any, res: any, next: any) {
         const newRefreshToken = JwtTokenGenerator.RefreshToken(new_data)
 
         
-        setAuthCookie(res, { accessToken: newAccessToken, refreshToken: newRefreshToken })
+        // setAuthCookie(res, { accessToken: newAccessToken, refreshToken: newRefreshToken })
 
         req.user = { id: user.id, email: user.email }
         return next()

@@ -35,7 +35,7 @@ const login = catchAsync(async (req: Request, res: Response) => {
 
 
 
-     setAuthCookie(res, {accessToken: AccessToken, refreshToken: RefreshToken});
+    //  setAuthCookie(res, {accessToken: AccessToken, refreshToken: RefreshToken});
 
 
     // res.cookie("access_token", AccessToken , { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 });
@@ -45,7 +45,8 @@ const login = catchAsync(async (req: Request, res: Response) => {
     statusCode: statusCode.OK,
     success: true,
     message: "Login successfully.",
-    data: envList.NODE_ENV != "development" ? [] : {AccessToken, RefreshToken }
+    // data: envList.NODE_ENV != "development" ? [] : {AccessToken, RefreshToken }
+    data: {access_token: AccessToken, refresh_token: RefreshToken}
   });
     
 
